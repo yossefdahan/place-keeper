@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place-Keeper-Preferences</title>
+</head>
+
+<body>
+    <h1>Place-Keeper-Preferences</h1>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="map.html">Map</a>
+    </nav>
+
+    <section>
+        <form onsubmit="submit(event)">
+
+            <label for="email">E-mail:</label>
+            <input type="email" name="email" id="email"/>
+
+            <label for="age">Age: <span id="sAge">26</span></label>
+            <input type="range" id="age" name="age" step="10" min="18" max="120" value="26"
+                onchange="showAge(this.value)"/>
+
+
+            <label for="bg-color">Set Background Color:</label>
+            <input type="color" id="bg-color" name="bg-color" value="#ffffff"" />
+
+            <label for="font-color">Set Text Color:</label>
+            <input type="color" id="font-color" name="color" value="#000000"" />
+
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" />
+
+            <label for="time">Birth Time:</label>
+            <input type="time" id="time" name="time">
+
+        </form>
+    </section>
+</body>
+
+</html>
