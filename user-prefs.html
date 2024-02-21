@@ -16,31 +16,37 @@
     </nav>
 
     <section>
-        <form onsubmit="submit(event)">
+        <form>
 
             <label for="email">E-mail:</label>
-            <input type="email" name="email" id="email"/>
+            <input type="email" name="email" id="email" />
 
             <label for="age">Age: <span id="sAge">26</span></label>
             <input type="range" id="age" name="age" step="10" min="18" max="120" value="26"
-                onchange="showAge(this.value)"/>
+                onchange="showAge(this.value)" />
 
 
             <label for="bg-color">Set Background Color:</label>
             <input type="color" id="bg-color" name="bg-color" value="#ffffff"" />
 
-            <label for="font-color">Set Text Color:</label>
+            <label for=" font-color">Set Text Color:</label>
             <input type="color" id="font-color" name="color" value="#000000"" />
 
 
-            <label for="dob">Date of Birth:</label>
+            <label for=" dob">Date of Birth:</label>
             <input type="date" id="dob" name="dob" />
 
             <label for="time">Birth Time:</label>
             <input type="time" id="time" name="time">
+            <button>Set</button>
 
         </form>
     </section>
+
+    <script src="js/utilService.js"></script>
+    <script src="js/userService.js"></script>
+    <script src="js/placeService.js"></script>
+
 </body>
 
 </html>
