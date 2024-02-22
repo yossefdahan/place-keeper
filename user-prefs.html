@@ -7,30 +7,30 @@
     <title>Place-Keeper-Preferences</title>
 </head>
 
-<body>
+<body onload="onInit()">
     <h1>Place-Keeper-Preferences</h1>
 
     <nav>
-        <a href="index.html">Home</a> |
+        <a href="home.html">Home</a> |
         <a href="map.html">Map</a>
     </nav>
 
     <section>
-        <form onsubmit="submit(event)">
+        <form onsubmit="onSubmit(event,this)">
 
             <label for="email">E-mail:</label>
-            <input type="email" name="email" id="email"/>
+            <input type="email" name="email" id="email" />
 
             <label for="age">Age: <span id="sAge">26</span></label>
             <input type="range" id="age" name="age" step="10" min="18" max="120" value="26"
-                onchange="showAge(this.value)"/>
+                onchange="showAge(this.value)" />
 
 
             <label for="bg-color">Set Background Color:</label>
             <input type="color" id="bg-color" name="bg-color" value="#ffffff"" />
 
-            <label for="font-color">Set Text Color:</label>
-            <input type="color" id="font-color" name="color" value="#000000"" />
+            <label for=" font-color">Set Text Color:</label>
+            <input type="color" id="font-color" name="color" value="#000000" />
 
 
             <label for="dob">Date of Birth:</label>
@@ -38,9 +38,18 @@
 
             <label for="time">Birth Time:</label>
             <input type="time" id="time" name="time">
+            <button>Set</button>
 
         </form>
     </section>
+
+
+
+    <script src="js/utils.js"></script>
+    <script src="js/local-storage.js"></script>
+    <script src="js/controlers/user-controler.js"></script>
+    <script src="js/services/user-service.js"></script>
+
 </body>
 
 </html>

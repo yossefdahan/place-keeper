@@ -5,17 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place-Keeper-Map</title>
+    <link rel="stylesheet" href="css/map-style.css">
 </head>
 
-<body>
+<body onload="onInit()">
     <h1>Place-Keeper-Map</h1>
     <nav>
-        <a href="index.html">Home</a> |
+        <a href="home.html">Home</a> |
         <a href="user-prefs.html">Preferences</a>
-
-
-
     </nav>
+
+    <section class="place-container"></section>
+
+    <div class="map"></div>
+    <div class="map-btn"></div>
+    <script src="js/utils.js"></script>
+    <script src="js/local-storage.js"></script>
+    <script src="js/controlers/map-controler.js"></script>
+    <script src="js/services/map-service.js"></script>
+
+    <!-- <script src="js/geo-location.js"></script> -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDElUwXgKJIonNDyOlmaIafPh2rywqfCPY">
+    </script>
+
 
 </body>
 
