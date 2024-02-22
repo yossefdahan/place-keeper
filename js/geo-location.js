@@ -7,26 +7,13 @@ function getPosition() {
         return
     }
 
-<<<<<<< HEAD
     navigator.geolocation.getCurrentPosition(showLocation, handleLocationError)
 
 
-=======
-    // One shot position retrieval...
-    navigator.geolocation.getCurrentPosition(showLocation, handleLocationError)
-    
-    // ...or continous watch
->>>>>>> 15685a06a9ba8f644026e809b79184bcf536a5b2
     // navigator.geolocation.watchPosition(showLocation, handleLocationError)
 }
 
 function showLocation(position) {
-<<<<<<< HEAD
-
-=======
-    
-    console.log(position)
->>>>>>> 15685a06a9ba8f644026e809b79184bcf536a5b2
     const { latitude: lat, longitude: lng, accuracy } = position.coords
 
     // document.getElementById("latitude").innerHTML = lat
@@ -35,19 +22,11 @@ function showLocation(position) {
 
     // var date = new Date(position.timestamp)
     // document.getElementById("timestamp").innerHTML = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-<<<<<<< HEAD
 
     initMap(29.557669, 34.951923)
 }
 
 function initMap(lat, lng) {
-=======
-    
-    initMap(lat, lng)
-}
-
-function initMap(lat = 31, lng = 31) {
->>>>>>> 15685a06a9ba8f644026e809b79184bcf536a5b2
 
     const elMap = document.querySelector('.map')
     const mapOptions = {
@@ -81,10 +60,6 @@ function handleLocationError(error) {
             locationError.innerHTML = "The browser timed out before retrieving the location."
             break
     }
-<<<<<<< HEAD
 }
 
 
-=======
-}
->>>>>>> 15685a06a9ba8f644026e809b79184bcf536a5b2
