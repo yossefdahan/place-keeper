@@ -3,21 +3,24 @@
 var gMarkers = []
 var gMap
 
+var gLat
+var gLng
+var gZoom
+
 function onInit() {
     initMap(29.550360, 34.952278, 12)
     renderPlaces()
     renderMarkers()
-
-
 }
 
 function renderPlaces() {
     const places = getPlaces()
     const strHTMLs = places.map(place => `
-    <div>${place.name}</div>
-    <button class="delete-btn" onclick="onRemovePlace('${place.id}')">X</button>
-    <button class="delete-btn" onclick="onGoToPlace('${place.id}')">Go!</button>
     
+    <div class="names">${place.name}
+    <button class="delete-btn" onclick="onRemovePlace('${place.id}')">X</button>
+    <button class="go-btn" onclick="onGoToPlace('${place.id}')">Go!</button>
+    </div>
     `)
     document.querySelector('.place-container').innerHTML = strHTMLs.join('')
 
@@ -85,13 +88,12 @@ function initMap(lat = 31, lng = 31, zoom = 10) {
 
         // onAddPlace()
         // var name = gName
-        const lat = ev.latLng.lat()
-        const lng = ev.latLng.lng()
-        const name = prompt('Place name?', 'Place 1')
+        gLat = ev.latLng.lat()
+        gLng = ev.latLng.lng()
+        gZoom = map.getZoom()
+        // const name = prompt('Place name?', 'Place 1')
         console.log(ev, name, lat, lng);
-        addPlace(name, lat, lng, map.getZoom())
-        renderPlaces()
-        renderMarkers()
+        onAddPlace()
     })
 }
 
@@ -101,25 +103,22 @@ function onAddPlace() {
     const elHeading = document.querySelector('h2')
     elHeading.innerText = 'add place'
     elModal.showModal()
-    const elForm = document.querySelector('form')
-    elForm.addEventListener('submit', function (event) {
-        ev.preventDefault()
 
-    })
-    var elInput = elForm.querySelector('input')
-    console.log(elInput.value);
-
-    return gName = elInput.value
 }
 
-// function onSubmit(ev) {
-//     ev.preventDefault()
-//     // const elForm = document.querySelector('form')
-//     var elInput = elForm.querySelector('input')
+function onSubmit(ev) {
+    ev.preventDefault()
+    const elModal = document.querySelector('.modal')
+    const elForm = document.querySelector('form')
+    var elInput = elForm.querySelector('input')
 
-//     gName = elInput.value
 
-// }
+    addPlace(elInput.value, gLat, gLng, gZoom)
+    renderPlaces()
+    renderMarkers()
+    elModal.close()
+    elForm.reset()
+}
 
 function handleLocationError(error) {
     var locationError = document.getElementById("locationError")
