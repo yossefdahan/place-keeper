@@ -1,9 +1,14 @@
 'use strict'
 
+var gMarkers = []
+var gMap
 
 function onInit() {
+    initMap(29.550360, 34.952278, 12)
     renderPlaces()
-    getPosition()
+    renderMarkers()
+
+
 }
 
 function renderPlaces() {
@@ -15,16 +20,26 @@ function renderPlaces() {
     
     `)
     document.querySelector('.place-container').innerHTML = strHTMLs.join('')
+
+    var userData = getUser()
+    createUserStyle(userData)
 }
 
 function onRemovePlace(placeId) {
     removePlace(placeId)
     renderPlaces()
+    renderMarkers()
 }
 
 function onGoToPlace(placeId) {
-    onPanToPlace(placeId)
-    // getPlaceById(placeId)
+
+    var currplace = getPlaceById(placeId)
+
+    var { lat, lng, zoom } = currplace
+
+    initMap(lat, lng, zoom)
+
+    renderMarkers()
 }
 
 function getPosition() {
@@ -41,20 +56,21 @@ function showLocation(position) {
     initMap(lat, lng, accuracy)
 }
 
-function initMap(lat = 31, lng = 31, zoom) {
+function initMap(lat = 31, lng = 31, zoom = 10) {
     var elMap = document.querySelector('.map')
     const mapOptions = {
         center: { lat, lng },
         zoom,
     }
 
-    const centerControlDiv = document.querySelector(".map-btn")
+    var map = new google.maps.Map(elMap, mapOptions)
+    gMap = map
+
+    const centerControlDiv = document.createElement('div')
     const centerControl = createCenterControl(map)
 
     centerControlDiv.appendChild(centerControl);
-    var map = new google.maps.Map(elMap, mapOptions)
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv)
-
 
 
     const markerOptions = {
@@ -62,16 +78,48 @@ function initMap(lat = 31, lng = 31, zoom) {
         map,
         title: 'Hello World!'
     }
+
+
     const marker = new google.maps.Marker(markerOptions)
     map.addListener('click', ev => {
-        const name = prompt('Place name?', 'Place 1')
+
+        // onAddPlace()
+        // var name = gName
         const lat = ev.latLng.lat()
         const lng = ev.latLng.lng()
+        const name = prompt('Place name?', 'Place 1')
         console.log(ev, name, lat, lng);
         addPlace(name, lat, lng, map.getZoom())
         renderPlaces()
+        renderMarkers()
     })
 }
+
+function onAddPlace() {
+
+    const elModal = document.querySelector('.modal')
+    const elHeading = document.querySelector('h2')
+    elHeading.innerText = 'add place'
+    elModal.showModal()
+    const elForm = document.querySelector('form')
+    elForm.addEventListener('submit', function (event) {
+        ev.preventDefault()
+
+    })
+    var elInput = elForm.querySelector('input')
+    console.log(elInput.value);
+
+    return gName = elInput.value
+}
+
+// function onSubmit(ev) {
+//     ev.preventDefault()
+//     // const elForm = document.querySelector('form')
+//     var elInput = elForm.querySelector('input')
+
+//     gName = elInput.value
+
+// }
 
 function handleLocationError(error) {
     var locationError = document.getElementById("locationError")
@@ -91,21 +139,6 @@ function handleLocationError(error) {
             break
     }
 }
-
-function onPanToPlace(placeId) {
-    var elMap = document.querySelector('.map')
-    const place = getPlaceById(placeId)
-    var { lat, lng, zoom } = place
-
-    const mapOptions = {
-        center: { lat, lng },
-        zoom,
-    }
-    var map = new google.maps.Map(elMap, mapOptions)
-    map.setCenter({ lat: place.lat, lng: place.lng })
-    map.setZoom(place.zoom)
-}
-
 
 function createCenterControl(map) {
     const controlButton = document.createElement("button");
@@ -128,7 +161,43 @@ function createCenterControl(map) {
     controlButton.type = "button";
     // Setup the click event listeners: simply set the map to Chicago.
     controlButton.addEventListener("click", () => {
-        map.setCenter(chicago);
+        map.setCenter(getPosition());
     });
+    renderMarkers()
+
     return controlButton;
+}
+
+function renderMarkers() {
+    const places = getPlaces()
+    // remove previous markers 
+    gMarkers.forEach(marker => marker.setMap(null))
+    // every place is creating a marker 
+    gMarkers = places.map(place => {
+        return new google.maps.Marker({
+            position: place,
+            map: gMap,
+            title: place.name
+        })
+    })
+}
+
+function downloadCSV(elLink) {
+    const csvContent = getAsCSV()
+    elLink.href = 'data:text/csv;charset=utf-8,' + csvContent
+}
+
+function onCloseModal() {
+    document.querySelector('.modal').close()
+}
+
+function createUserStyle(userData) {
+
+    var { txtColor, bgColor } = userData
+
+
+
+    var elBody = document.querySelector('body')
+    elBody.style.backgroundColor = bgColor
+    elBody.style.color = txtColor
 }

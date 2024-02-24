@@ -4,4 +4,75 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+h1 {
+    background-color: rgb(216, 151, 66);
+    border: 2px dotted black;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    display: block;
+    font-size: 18px;
+    text-decoration: none;
+    margin-bottom: 50px;
+    margin-top: 25px;
+}
+
+a {
+    text-decoration: none;
+    background-color: rgb(216, 151, 66);
+    padding: 5px;
+    border-radius: 50%;
+}
+
+a:hover {
+    background-color: azure;
+    color: rgb(56, 53, 187);
+    text-decoration: underline;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: grid;
+    grid-template-rows: repeat(8 100px);
+    width: 400px;
+    height: 50vh;
+    border: 3px solid lightblue;
+    border: 5px double lightgreen;
+    justify-items: center;
+    background-color: rgb(216, 151, 66);
+    border-radius: 25px;
+
+}
+
+input,
+select {
+    border-radius: 15px;
+    width: 150px;
+    height: 35px;
+}
+
+button {
+    width: 200px;
+    background-color: antiquewhite;
+    border: none;
+    font-size: 18px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+
+}
+
+button:hover {
+    background-color: beige;
+    color: blue;
 }

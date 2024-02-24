@@ -8,6 +8,7 @@ var gUser = {
     txtColor: '',
     bgColor: '',
     age: '',
+    gender: '',
     birthDate: '',
     birthTime: ''
 }

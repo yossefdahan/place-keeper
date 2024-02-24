@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place-Keeper-Preferences</title>
+    <link rel="stylesheet" href="css/home-style.css">
 </head>
 
 <body onload="onInit()">
@@ -25,6 +26,14 @@
             <input type="range" id="age" name="age" step="10" min="18" max="120" value="26"
                 onchange="showAge(this.value)" />
 
+
+            <!-- <label for="gender">Gender:</label>
+            <input type="text" id="gender" name="gender" list="genderOptions"> -->
+            <select id="gender-list">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
 
             <label for="bg-color">Set Background Color:</label>
             <input type="color" id="bg-color" name="bg-color" value="#ffffff"" />
